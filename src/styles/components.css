@@ -834,6 +834,119 @@ select {
   }
 }
 
+/* Subfolder Styles */
+.content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.content-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.subfolders-section {
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1rem;
+}
+
+.subfolders-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.subfolder-card {
+  background: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.subfolder-card:hover {
+  background: #F9FAFB;
+  border-color: #D1D5DB;
+}
+
+.subfolder-card.selected {
+  background: #EFF6FF;
+  border-color: #BFDBFE;
+}
+
+.subfolder-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.subfolder-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.folder-icon::before {
+  content: "📁";
+}
+
+.subfolder-count {
+  font-size: 0.75rem;
+  color: #6B7280;
+}
+
+.subfolder-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.lesson-folder {
+  background: #EFF6FF;
+  color: #3B82F6;
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  font-size: 0.625rem;
+  margin-left: 0.5rem;
+}
+
+.lesson-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.subfolder-select {
+  padding: 0.25rem;
+  font-size: 0.75rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 4px;
+  background: white;
+}
+
+.no-subfolders {
+  text-align: center;
+  padding: 1.5rem;
+  color: #6B7280;
+  background: #F9FAFB;
+  border-radius: 8px;
+  font-size: 0.875rem;
+}
+
 /* Course Management Styles */
 .courses-container {
   padding: 1rem;

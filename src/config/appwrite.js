@@ -17,8 +17,9 @@ const databases = new Databases(client);
 // Constants
 const DATABASE_ID = '67e58913001aa82af861'; // Your actual database ID
 const DOUBTS_COLLECTION_ID = '67e5f8bf002522bb1b3a';
+const SUBFOLDERS_COLLECTION_ID = '67eda5a5001a7d00e677'; // Replace with your actual subfolder collection ID
 
 // Export the account service
-export { account, databases, DATABASE_ID, DOUBTS_COLLECTION_ID };
+export { account, databases, DATABASE_ID, DOUBTS_COLLECTION_ID, SUBFOLDERS_COLLECTION_ID };
 export default client; 
 
