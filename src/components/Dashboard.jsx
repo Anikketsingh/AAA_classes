@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import { account } from '../config/appwrite';
 import DoubtsList from './DoubtsList';
 import CourseManagement from './CourseManagement';
+import CarouselManager from './CarouselManager';
 import '../styles/components.css';
+import '../styles/carousel.css';
 
 const Dashboard = ({ onLogout }) => {
   const [user, setUser] = useState(null);
@@ -48,6 +50,8 @@ const Dashboard = ({ onLogout }) => {
         );
       case 'courses':
         return <CourseManagement currentUser={user} key={forceReset} />;
+      case 'carousel':
+        return <CarouselManager />;
       default:
         return <div>Section under development</div>;
     }
@@ -79,6 +83,15 @@ const Dashboard = ({ onLogout }) => {
               >
                 <i className="nav-icon courses-icon"></i>
                 <span>My Courses</span>
+              </button>
+            </li>
+            <li>
+              <button
+                className={`nav-item carousel ${activeSection === 'carousel' ? 'active' : ''}`}
+                onClick={() => handleSectionChange('carousel')}
+              >
+                <span className="carousel-icon">🎞️</span>
+                <span>Carousel</span>
               </button>
             </li>
             <li>

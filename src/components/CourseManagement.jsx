@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { databases, DATABASE_ID } from '../config/appwrite';
 import CourseDetails from './CourseDetails';
+import ImageUploader from './ImageUploader';
 import '../styles/components.css';
 
 const COURSES_COLLECTION_ID = '67e58e94003546802bb8';
@@ -17,11 +18,11 @@ const CourseManagement = ({ currentUser }) => {
     instructor: currentUser?.name || '',
     teacherId: currentUser?.$id || '',
     duration: '',
-    totalLessons: 0,
     students: 0,
     price: 0,
     isPopular: false,
-    isNew: true
+    isNew: true,
+    image: ''
   });
 
   useEffect(() => {
@@ -58,6 +59,9 @@ const CourseManagement = ({ currentUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log('Creating new course with data:', newCourse);
+      console.log('Image URL:', newCourse.image);
+
       await databases.createDocument(
         DATABASE_ID,
         COURSES_COLLECTION_ID,
@@ -185,20 +189,7 @@ const CourseManagement = ({ currentUser }) => {
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="totalLessons">Total Lessons*</label>
-              <input
-                type="number"
-                id="totalLessons"
-                name="totalLessons"
-                value={newCourse.totalLessons}
-                onChange={handleInputChange}
-                required
-                className="form-input"
-                min="0"
-                placeholder="Number of lessons"
-              />
-            </div>
+
 
             <div className="form-group">
               <label htmlFor="price">Price*</label>
@@ -227,6 +218,38 @@ const CourseManagement = ({ currentUser }) => {
                 Mark as Popular
               </label>
             </div>
+
+            <div className="form-group checkbox-group">
+              <label>
+                <input
+                  type="checkbox"
+                  name="isNew"
+                  checked={newCourse.isNew}
+                  onChange={handleInputChange}
+                />
+                Mark as New
+              </label>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label>Course Thumbnail Image</label>
+            <ImageUploader
+              onUploadComplete={(imageUrl) => {
+                console.log('Image upload completed in CourseManagement. URL:', imageUrl);
+                setNewCourse({
+                  ...newCourse,
+                  image: imageUrl
+                });
+              }}
+              onUploadError={(errorMessage) => {
+                setError(errorMessage);
+                setTimeout(() => setError(null), 3000);
+              }}
+            />
+            {newCourse.image && (
+              <p className="image-url-preview">Image URL: {newCourse.image}</p>
+            )}
           </div>
 
           <div className="form-actions">
@@ -247,11 +270,15 @@ const CourseManagement = ({ currentUser }) => {
           courses.map((course) => (
             <div key={course.$id} className="course-card-simple">
               <div className="course-image-container">
-                <div className="course-image-placeholder">
-                  <span>300</span>
-                  <span>×</span>
-                  <span>150</span>
-                </div>
+                {course.image ? (
+                  <img src={course.image} alt={course.title} className="course-image" />
+                ) : (
+                  <div className="course-image-placeholder">
+                    <span>300</span>
+                    <span>×</span>
+                    <span>150</span>
+                  </div>
+                )}
               </div>
               <div className="course-card-simple-content">
                 <h3 className="course-card-simple-title">{course.title}</h3>
