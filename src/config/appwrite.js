@@ -5,8 +5,8 @@ const client = new Client();
 
 // Set the endpoint and project ID
 client
-    .setEndpoint('https://cloud.appwrite.io/v1')
-    .setProject('67e34314002ff216be44');
+    .setEndpoint(import.meta.env.VITE_APPWRITE_ENDPOINT || 'https://cloud.appwrite.io/v1')
+    .setProject(import.meta.env.VITE_APPWRITE_PROJECT_ID);
 
 // Initialize the Account service
 const account = new Account(client);
@@ -15,11 +15,19 @@ const account = new Account(client);
 const databases = new Databases(client);
 
 // Constants
-const DATABASE_ID = '67e58913001aa82af861'; // Your actual database ID
-const DOUBTS_COLLECTION_ID = '67e5f8bf002522bb1b3a';
-const SUBFOLDERS_COLLECTION_ID = '67eda5a5001a7d00e677'; // Replace with your actual subfolder collection ID
+const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID;
+const DOUBTS_COLLECTION_ID = import.meta.env.VITE_APPWRITE_DOUBTS_COLLECTION_ID;
+const SUBFOLDERS_COLLECTION_ID = import.meta.env.VITE_APPWRITE_SUBFOLDERS_COLLECTION_ID;
+const USER_METADATA_COLLECTION_ID = import.meta.env.VITE_APPWRITE_USER_METADATA_COLLECTION_ID;
 
 // Export the account service
-export { account, databases, DATABASE_ID, DOUBTS_COLLECTION_ID, SUBFOLDERS_COLLECTION_ID };
+export {
+  account,
+  databases,
+  DATABASE_ID,
+  DOUBTS_COLLECTION_ID,
+  SUBFOLDERS_COLLECTION_ID,
+  USER_METADATA_COLLECTION_ID
+};
 export default client; 
 

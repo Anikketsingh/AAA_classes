@@ -3,6 +3,8 @@ import { account } from '../config/appwrite';
 import DoubtsList from './DoubtsList';
 import CourseManagement from './CourseManagement';
 import CarouselManager from './CarouselManager';
+import DemoVideoManagement from './DemoVideoManagement';
+import UserApproval from './UserApproval';
 import '../styles/components.css';
 import '../styles/carousel.css';
 
@@ -52,6 +54,10 @@ const Dashboard = ({ onLogout }) => {
         return <CourseManagement currentUser={user} key={forceReset} />;
       case 'carousel':
         return <CarouselManager />;
+      case 'demos':
+        return <DemoVideoManagement />;
+      case 'user-approval':
+        return <UserApproval />;
       default:
         return <div>Section under development</div>;
     }
@@ -92,6 +98,24 @@ const Dashboard = ({ onLogout }) => {
               >
                 <span className="carousel-icon">🎞️</span>
                 <span>Carousel</span>
+              </button>
+            </li>
+            <li>
+              <button
+                className={`nav-item demos ${activeSection === 'demos' ? 'active' : ''}`}
+                onClick={() => handleSectionChange('demos')}
+              >
+                <span className="demos-icon">🎬</span>
+                <span>Demo Videos</span>
+              </button>
+            </li>
+            <li>
+              <button
+                className={`nav-item user-approval ${activeSection === 'user-approval' ? 'active' : ''}`}
+                onClick={() => handleSectionChange('user-approval')}
+              >
+                <span className="user-approval-icon">👤</span>
+                <span>User Approval</span>
               </button>
             </li>
             <li>

@@ -91,8 +91,9 @@ const VideoUploader = ({ onUploadComplete, onUploadError }) => {
       // Wait for the upload to complete
       await uploadPromise;
 
-      // Construct the CDN URL
-      const cdnUrl = `https://${BUNNY_STORAGE_ZONE}.b-cdn.net/${fileName}`;
+      // Construct the CDN URL with the correct format
+      const cdnUrl = `https://aaa-classes.b-cdn.net/${fileName}`;
+      console.log('Video uploaded successfully. URL:', cdnUrl);
       onUploadComplete(cdnUrl);
     } catch (error) {
       console.error('Upload error:', error);
